@@ -20,7 +20,11 @@ export class AppComponent implements OnInit {
   auth = new FirebaseTSAuth();
   firestore = new FirebaseTSFirestore();
   userHasProfile = true;
+<<<<<<< Updated upstream
   userDocument!: UserDocument;
+=======
+  private static userDocument: UserDocument;
+>>>>>>> Stashed changes
 
   ngOnInit(): void {
     this.toggleControl.valueChanges.subscribe(val => {
@@ -43,7 +47,11 @@ export class AppComponent implements OnInit {
             },
             whenSignedInAndEmailVerified: user => {
               this.getUserProfile();
+<<<<<<< Updated upstream
               this.router.navigate([""]);
+=======
+              this.router.navigate(["postFeed"]);
+>>>>>>> Stashed changes
             },
             whenChanged: user => {
 
@@ -63,15 +71,28 @@ export class AppComponent implements OnInit {
         name: "Getting Document",
         path: [ "Users", users ],
         onUpdate: (result) => {
+<<<<<<< Updated upstream
           this.userDocument = <UserDocument> result.data();
           this.userHasProfile = result.exists; 
+=======
+          AppComponent.userDocument = <UserDocument> result.data();
+          this.userHasProfile = result.exists;
+          AppComponent.userDocument.userId = users;
+          if(this.userHasProfile) {
+            this.router.navigate(["postFeed"]);
+          } 
+>>>>>>> Stashed changes
         }
       
     });
     } else {
       console.error('No User found!');
     }
+<<<<<<< Updated upstream
 }
+=======
+  }
+>>>>>>> Stashed changes
 
   onLogoutClick(){
       this.auth.signOut();
@@ -84,7 +105,15 @@ export class AppComponent implements OnInit {
       this.loginSheet2.open(AuthenticatorComponent);
   }
 }
+<<<<<<< Updated upstream
 export interface UserDocument {
   publicName: string;
   description: string;
+=======
+
+export interface UserDocument {
+  publicName: string;
+  description: string;
+  userId: string;
+>>>>>>> Stashed changes
 }

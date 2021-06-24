@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 <nav id="nav-bar">
   <div id="nav-bar-content">
     <div id="nav-bar-left">
@@ -10,6 +11,19 @@
     </div>
   </div>
 </nav>
+=======
+<mat-toolbar id="nav-bar">
+    <div id="nav-bar-left">
+      <div style="font-size: npm 1.5em"class="nav-bar-items">#DJBEN</div>
+    </div>
+    <div class="spacer"></div>
+    <div id="nav-bar-right">
+      <a mat-button *ngIf="loggedIn() && userHasProfile" class="nav-bar-items" >{{userDocument?.publicName}}</a>
+      <a mat-raised-button color="warn" *ngIf="!loggedIn()" (click)="onLoginClick()"  class="nav-bar-items">Login</a>
+      <a mat-raised-button color="warn" *ngIf="loggedIn()" (click)="onLogoutClick()"  class="nav-bar-items">Log out</a>
+    </div>
+</mat-toolbar>
+>>>>>>> Stashed changes
 <router-outlet></router-outlet>
 
 <app-profile [show]="loggedIn() && !userHasProfile"></app-profile>

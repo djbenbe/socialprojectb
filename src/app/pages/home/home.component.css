@@ -3,16 +3,37 @@
   height: 100%;
 
 }
+<<<<<<< Updated upstream
 #home-page-landing{
+=======
+#home-page-landing {
+>>>>>>> Stashed changes
   width: 100%;
   height: 100%;
   background: url(src/assets/4882066.jpg) no-repeat fixed center;
   background-size: cover;
+<<<<<<< Updated upstream
+=======
+  background-position: center;
+>>>>>>> Stashed changes
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 100%;
   min-height: 800px;
 }
+<<<<<<< Updated upstream
+=======
+#nav-bar-left, #nav-bar-right {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  padding: 0 2em;
+  color: white;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
+>>>>>>> Stashed changes
 #landing-left {
   display: flex;
   color: #fff;
@@ -34,5 +55,12 @@
   font-size: 2em;
   padding: .5em;
 }
+<<<<<<< Updated upstream
 
+=======
+#landing-left h1 {
+  margin: 0 0 1em;
+  font-weight: bold;
+}
+>>>>>>> Stashed changes
 

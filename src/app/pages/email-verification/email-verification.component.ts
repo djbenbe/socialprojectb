@@ -10,7 +10,11 @@ export class EmailVerificationComponent implements OnInit {
   auth = new FirebaseTSAuth();
   constructor( private router: Router) { }
    
+<<<<<<< Updated upstream
 
+=======
+  
+>>>>>>> Stashed changes
   ngOnInit(): void {
     const _currentUser = this.auth.getAuth().currentUser;
     if (_currentUser && _currentUser.uid) {

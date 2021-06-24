@@ -12,6 +12,14 @@ import { AuthenticatorComponent } from './tools/authenticator/authenticator.comp
 import { MaterialModule } from './material/material.module';
 import { EmailVerificationComponent } from './pages/email-verification/email-verification.component';
 import { ProfileComponent } from './tools/profile/profile.component';
+<<<<<<< Updated upstream
+=======
+import { PostFeedComponent } from './pages/post-feed/post-feed.component';
+import { CreatePostComponent } from './tools/create-post/create-post.component';
+import { PostComponent } from './tools/post/post.component';
+import { ReplyComponent } from './tools/reply/reply.component';
+
+>>>>>>> Stashed changes
 
 @NgModule({
   declarations: [
@@ -19,7 +27,15 @@ import { ProfileComponent } from './tools/profile/profile.component';
     HomeComponent,
     AuthenticatorComponent,
     EmailVerificationComponent,
+<<<<<<< Updated upstream
     ProfileComponent
+=======
+    ProfileComponent,
+    PostFeedComponent,
+    CreatePostComponent,
+    PostComponent,
+    ReplyComponent
+>>>>>>> Stashed changes
   ],
   imports: [
     BrowserModule,
