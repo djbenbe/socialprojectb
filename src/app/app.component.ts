@@ -6,7 +6,9 @@ import { FirebaseTSFirestore } from 'firebasets/firebasetsFirestore/firebaseTSFi
 import { FirebaseTSAuth } from 'firebasets/firebasetsAuth/firebaseTSAuth';
 
 import { AuthenticatorComponent } from './tools/authenticator/authenticator.component';
+import { UserDocument } from './interface/user-document';
 import { FormControl } from '@angular/forms';
+import { OverlayContainer } from '@angular/cdk/overlay';
 
 @Component({
   selector: 'app-root',
@@ -20,38 +22,30 @@ export class AppComponent implements OnInit {
   auth = new FirebaseTSAuth();
   firestore = new FirebaseTSFirestore();
   userHasProfile = true;
-<<<<<<< Updated upstream
-  userDocument!: UserDocument;
-=======
-  private static userDocument: UserDocument;
->>>>>>> Stashed changes
+  profileImage: string | undefined;
+  isDarkTheme: Boolean = false;
 
+  private static userDocument: UserDocument | null;
   ngOnInit(): void {
-    this.toggleControl.valueChanges.subscribe(val => {
-      this.className = val ? 'darkMode' : '';
-    });
+    this.isDarkTheme = localStorage.getItem('theme')=== "Dark" ? true:false;
   }
-  constructor(private loginSheet2: MatBottomSheet, private router: Router) {
+  constructor(private loginSheet2: MatBottomSheet, private overlay: OverlayContainer, private router: Router) {
     this.auth.listenToSignInStateChanges(
       user => {
         this.auth.checkSignInState(
           {
             whenSignedIn: user => {
-              this.router.navigate([""]);
             },
             whenSignedOut: user => {
-              this.router.navigate([""]);
+              AppComponent.userDocument = null;
+              this.router.navigate(["**"])
             },
             whenSignedInAndEmailNotVerified: user => {
               this.router.navigate(["emailVerification"]);
             },
             whenSignedInAndEmailVerified: user => {
               this.getUserProfile();
-<<<<<<< Updated upstream
-              this.router.navigate([""]);
-=======
               this.router.navigate(["postFeed"]);
->>>>>>> Stashed changes
             },
             whenChanged: user => {
 
@@ -61,59 +55,59 @@ export class AppComponent implements OnInit {
       }
     );
   }
-
+  public static getUserDocement(){
+    let userDoc = AppComponent.userDocument;
+    return userDoc;
+  }
+  getUsername(){
+    try{
+      if(AppComponent.userDocument){
+        return AppComponent.userDocument.publicName;
+      }
+    } catch (err) {
+      return console.error('nu User found!');
+    }
+    
+  }
   getUserProfile(){
     const _currentUser = this.auth.getAuth().currentUser;
     if (_currentUser && _currentUser.uid) {
       const users: string = _currentUser.uid;
 
-    this.firestore.listenToDocument({
-        name: "Getting Document",
-        path: [ "Users", users ],
-        onUpdate: (result) => {
-<<<<<<< Updated upstream
-          this.userDocument = <UserDocument> result.data();
-          this.userHasProfile = result.exists; 
-=======
-          AppComponent.userDocument = <UserDocument> result.data();
-          this.userHasProfile = result.exists;
-          AppComponent.userDocument.userId = users;
-          if(this.userHasProfile) {
-            this.router.navigate(["postFeed"]);
-          } 
->>>>>>> Stashed changes
-        }
-      
-    });
+      this.firestore.listenToDocument({
+          name: "Getting Document",
+          path: [ "Users", users ],
+          onUpdate: (result) => {
+            AppComponent.userDocument = <UserDocument> result.data();
+            this.userHasProfile = result.exists;
+            AppComponent.userDocument.userId = users;
+            this.profileImage = AppComponent.userDocument.image;
+            if(this.userHasProfile) {
+              this.router.navigate(["postFeed"]);
+            } 
+          }
+        
+      });
     } else {
       console.error('No User found!');
     }
-<<<<<<< Updated upstream
-}
-=======
   }
->>>>>>> Stashed changes
-
+  themeSelect(){
+    localStorage.setItem('theme', this.isDarkTheme ? "Dark" : "Light");
+  }
   onLogoutClick(){
       this.auth.signOut();
   }
-
   loggedIn(){
       return this.auth.isSignedIn();
+  }
+  verificationIn(){
+    return this.auth.isEmailVerified();
   }
   onLoginClick(){
       this.loginSheet2.open(AuthenticatorComponent);
   }
-}
-<<<<<<< Updated upstream
-export interface UserDocument {
-  publicName: string;
-  description: string;
-=======
-
-export interface UserDocument {
-  publicName: string;
-  description: string;
-  userId: string;
->>>>>>> Stashed changes
+  onProfileClick(){
+    this.router.navigate(["profile/" + this.auth.getAuth().currentUser?.uid]);
+  }
 }

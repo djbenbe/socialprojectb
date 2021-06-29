@@ -20,7 +20,7 @@ export class PostFeedComponent implements OnInit {
   onCreatePostClick() {
     this.dialog.open(CreatePostComponent);
   }
-
+  
   getPosts() {
     this.firestore.getCollection({
       path: ["Post"],
